@@ -1,0 +1,10 @@
+/*
+  Layer order: Tailwind theme, then the site's own stylesheet, then Tailwind utilities.
+  Tailwind's preflight reset is left out on purpose so the hand-tuned site styles render exactly as before.
+  Utilities come last, so React Bits components styled with Tailwind classes still win over site rules.
+*/
+@layer theme, base, site, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "./styles/site.css" layer(site);
+@import "tailwindcss/utilities.css" layer(utilities);
+@source "./";
