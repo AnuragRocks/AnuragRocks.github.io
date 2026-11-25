@@ -404,6 +404,19 @@ html.js-reveal .rv.in{transform:none;opacity:1}
 .lab-intro{color:var(--muted);max-width:60ch;margin:-.6rem 0 var(--s5)}
 .card-head{flex-wrap:wrap}.card-head h3{min-width:0}
 
+
+/* home: logo scramble + intro replay */
+.brand{cursor:pointer;position:relative}
+.brand-name{display:inline-block;min-width:6ch;font-variant-numeric:tabular-nums}
+.brand.glitch .brand-name{color:var(--accent);text-shadow:-2px 0 rgba(225,29,72,.55),2px 0 rgba(14,165,233,.55);animation:jitter .12s steps(2) 5}
+@keyframes jitter{50%{transform:translate(1px,-1px) skewX(-6deg)}}
+.brand.glitch b{animation:jitter .12s steps(2) 5 reverse}
+.orbit-wrap.burst .orbit{animation-duration:2.2s}
+.orbit-wrap.burst .avatar-xl{animation:float 6s ease-in-out infinite,boop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes boop{0%{transform:scale(.85)}100%{transform:scale(1)}}
+.ask.flash::before{animation:drift 18s ease-in-out infinite alternate,flash 1s ease}
+@keyframes flash{0%{opacity:0}100%{opacity:1}}
+
 /* ================= motion layer ================= */
 .progress{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:3px;width:100%;transform-origin:0 50%;transform:scaleX(var(--p,0));background:linear-gradient(90deg,var(--accent),#a855f7,var(--signal));z-index:20;pointer-events:none}
 /* headline: letters rise in */
@@ -472,7 +485,7 @@ section.block h2.in::after{transform:scaleX(.35)}
 <div class="progress" aria-hidden="true"></div>
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#top"><b>~/</b>anurag</a>
+    <a class="brand" href="#top" id="brand" aria-label="Back to the start"><b>~/</b><span class="brand-name">anurag</span></a>
     <div class="nav-right">
       <nav aria-label="Sections"><ul>
         <li><a href="#top">Ask me</a></li>
@@ -1199,7 +1212,7 @@ var HEADSHOT=document.querySelector('.avatar-xl').src;
     }
     // typing line
     var ty=document.getElementById('typer');
-    if(ty){ var t=ty.querySelector('.t'), list=['React + Node apps','CI/CD pipelines','Kubernetes deployments','REST APIs that scale','Terraform-built infra','dashboards that stay live'], li=0, ci=0, del=false;
+    if(ty){ var t=ty.querySelector('.t'), list=['React + Node apps','CI/CD pipelines','Kubernetes deployments','REST APIs that scale','Terraform-built infra','dashboards that stay live'], li=0, ci=0, del=false; window.__resetTyper=function(){ li=0; ci=0; del=false; t.textContent=''; };
       if(reduce){ t.textContent=list[0]; }
       else (function step(){ var w=list[li]; if(!del){ ci++; t.textContent=w.slice(0,ci); if(ci===w.length){ del=true; return setTimeout(step,1600);} } else { ci--; t.textContent=w.slice(0,ci); if(ci===0){ del=false; li=(li+1)%list.length; } } setTimeout(step, del?35:70); })();
     }
@@ -1239,6 +1252,41 @@ var HEADSHOT=document.querySelector('.avatar-xl').src;
         if(e.target.tagName==='H2') e.target.classList.add('in'); else countUp(e.target); }); },{threshold:.6});
       document.querySelectorAll('section.block h2, .stat b').forEach(function(e){ io.observe(e); });
     }
+  })();
+
+  // ---------- home: click ~/anurag to scramble the logo and replay the intro ----------
+  (function(){
+    var brand=document.getElementById('brand'), name=brand&&brand.querySelector('.brand-name'); if(!brand) return;
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, GLYPHS='01<>{}[]#$%&*/\\|=+?', busy=false;
+    function scramble(){
+      var target='anurag', frame=0, total=16;
+      brand.classList.add('glitch');
+      (function f(){ frame++; var out='';
+        for(var i=0;i<target.length;i++){ out+= frame>total*(i+1)/target.length ? target[i] : GLYPHS[Math.floor(Math.random()*GLYPHS.length)]; }
+        name.textContent=out; if(frame<total+2) setTimeout(f,40); else { name.textContent=target; brand.classList.remove('glitch'); } })();
+    }
+    function restart(el){ if(!el) return; el.style.animation='none'; void el.offsetWidth; el.style.animation=''; }
+    function replay(){
+      // close the chat if it is open
+      var chat=document.getElementById('chat'), landing=document.getElementById('landing');
+      if(chat&&!chat.hidden){ document.getElementById('log').innerHTML=''; chat.hidden=true; landing.hidden=false; }
+      // rebuild the headline so every letter animates again
+      var h=document.querySelector('.role'); if(h) h.innerHTML=h.innerHTML;
+      ['.status','.hello','.lede','.typer','.landing .askbar','.landing .tiles','.scroll-hint','.wave','.orbit','.orbit.o2'].forEach(function(q){ document.querySelectorAll(q).forEach(restart); });
+      if(window.__resetTyper) window.__resetTyper();
+      var ow=document.querySelector('.orbit-wrap'), ask=document.querySelector('.ask');
+      [ow,ask].forEach(function(e){ if(!e) return; e.classList.remove('burst','flash'); void e.offsetWidth; });
+      if(ow) ow.classList.add('burst'); if(ask) ask.classList.add('flash');
+      setTimeout(function(){ if(ow) ow.classList.remove('burst'); if(ask) ask.classList.remove('flash'); },2300);
+    }
+    brand.addEventListener('click',function(e){
+      e.preventDefault(); if(busy) return; busy=true; setTimeout(function(){busy=false;},900);
+      var atTop=scrollY<40;
+      window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+      if(reduce){ var c=document.getElementById('chat'); if(c&&!c.hidden) document.getElementById('restart').click(); return; }
+      scramble();
+      if(atTop) replay(); else { var done=false, t=setTimeout(go,900); function go(){ if(done) return; done=true; clearTimeout(t); removeEventListener('scrollend',go); replay(); } addEventListener('scrollend',go,{once:true}); }
+    });
   })();
 })();
 </script>
