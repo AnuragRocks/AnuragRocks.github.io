@@ -6,14 +6,14 @@ const FILTERS: Array<[string, string]> = [
   ["data", "Data & AI"], ["systems", "Systems"], ["mobile", "Mobile"],
 ];
 
-type Project = { title: string; domain: string; tags: string; text: string; points?: string[]; stack: string[]; repo?: string };
+type Project = { title: string; domain: string; tags: string; text: string; points?: string[]; stack: string[]; repo?: string; cs?: string };
 
 const GH = "https://github.com/AnuragRocks/";
 const PROJECTS: Project[] = [
   { title: "ACare Aquatic Facility Platform", domain: "Full-stack + DevOps · 2026", tags: "devops web mobile",
     text: "A monorepo with FastAPI, React/Vite and MongoDB Atlas, plus an Android tablet app. Role-based access and audit logging throughout.",
     points: ["OTA release workflow that SHA-256 checksums the web bundle and publishes to GitHub Releases", "Signed Android APK workflow with signature verification", "Docker Compose stack with an operations runbook"],
-    stack: ["FastAPI", "MongoDB", "Docker", "GitHub Actions", "Render"] },
+    stack: ["FastAPI", "MongoDB", "Docker", "GitHub Actions", "Render"], cs: "acare" },
   { title: "Distributed Data Observability Platform", domain: "DevOps · Data", tags: "devops systems data",
     text: "Streaming pipeline health and metrics, from Kafka topics through Spark jobs to Grafana boards, deployed on Kubernetes.",
     stack: ["Java", "Kafka", "Spark", "Kubernetes", "Prometheus", "Grafana"], repo: "Distributed-Data-Observability-Platform" },
@@ -85,6 +85,7 @@ export default function Work() {
               </ul>
               <Stack items={["Docker", "GitHub Actions", "PostgreSQL", "Node.js", "React", "Vercel"]} />
               <span className="private">Private university repository</span>
+              <a className="cs-link" href="#/case/rodent-care">Read the case study →</a>
             </div>
           </article>
 
@@ -94,6 +95,7 @@ export default function Work() {
               <p>{p.text}</p>
               {p.points && <ul className="pts">{p.points.map((x) => <li key={x}>{x}</li>)}</ul>}
               <Stack items={p.stack} />
+              {p.cs && <a className="cs-link" href={`#/case/${p.cs}`}>Read the case study →</a>}
               {p.repo ? (
                 <a className="repo" href={GH + p.repo} {...ext}>View repository ↗</a>
               ) : (

@@ -1,7 +1,7 @@
 import { SplitHeading } from "@/components/MotionExtras";
 import type { CSSProperties } from "react";
 import CopyButton from "@/components/CopyButton";
-import { EMAIL, RESUME_URL } from "@/lib/motion";
+import { EMAIL, RESUMES } from "@/lib/motion";
 
 const ext = { target: "_blank", rel: "noopener" } as const;
 
@@ -22,7 +22,7 @@ export default function Contact() {
             <div className="row"><span>Email</span><span className="v copy-wrap"><span>{EMAIL}</span><CopyButton text={EMAIL} /></span></div>
             <div className="row"><span>LinkedIn</span><a href="https://www.linkedin.com/in/anurag-sharma-dev/" {...ext}>in/anurag-sharma-dev ↗</a></div>
             <div className="row"><span>GitHub</span><a href="https://github.com/AnuragRocks" {...ext}>github.com/AnuragRocks ↗</a></div>
-            <div className="row"><span>Résumé</span><a href={RESUME_URL} {...ext}>Open PDF ↗</a></div>
+            <div className="row"><span>Résumé</span><span className="v resume-pick">{RESUMES.map((r) => <a key={r.href} href={r.href} download {...ext}>{r.label} PDF ↓</a>)}</span></div>
           </div>
         </div>
       </div>

@@ -76,7 +76,7 @@ export function Stats() {
   );
 }
 
-const SECTIONS = ["about", "work", "skills", "lab", "journey", "contact"];
+const SECTIONS = ["about", "work", "skills", "lab", "notes", "journey", "contact"];
 const LABELS: Record<string, string> = { lab: "playground" };
 
 /** Section nav drawn as a linked list; the node for the section in view lights up. */

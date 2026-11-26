@@ -7,6 +7,7 @@ const NAV = [
   ["#work", "Work"],
   ["#skills", "Skills"],
   ["#lab", "Playground"],
+  ["#notes", "Notes"],
   ["#journey", "Journey"],
   ["#contact", "Contact"],
 ];
@@ -51,6 +52,11 @@ export default function Header({ onReplay }: { onReplay: () => void }) {
   // click ~/anurag to scramble the logo, scroll home and replay the intro
   const onBrand = (e: MouseEvent) => {
     e.preventDefault();
+    // on a case study or note page the logo just takes you home
+    if (location.hash.startsWith("#/")) {
+      location.hash = "#top";
+      return;
+    }
     if (busy.current) return;
     busy.current = true;
     setTimeout(() => (busy.current = false), 900);

@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { EMAIL, RESUME_URL } from "@/lib/motion";
+import { EMAIL, RESUMES } from "@/lib/motion";
 import CopyButton from "@/components/CopyButton";
 import Terminal from "./Terminal";
 
@@ -136,7 +136,7 @@ export function answer(key: Intent, ask: Ask): ReactNode[] {
           <div className="r"><span>Email</span><span className="copy-wrap"><span>{EMAIL}</span><CopyButton text={EMAIL} /></span></div>
           <div className="r"><span>LinkedIn</span><a href="https://www.linkedin.com/in/anurag-sharma-dev/" {...ext}>in/anurag-sharma-dev ↗</a></div>
           <div className="r"><span>GitHub</span><a href="https://github.com/AnuragRocks" {...ext}>AnuragRocks ↗</a></div>
-          <div className="r"><span>Résumé</span><a href={RESUME_URL} {...ext}>Open PDF ↗</a></div>
+          <div className="r"><span>Résumé</span><span className="resume-pick">{RESUMES.map((r) => <a key={r.href} href={r.href} download {...ext}>{r.label} ↓</a>)}</span></div>
         </B>,
       ];
     case "now":
@@ -172,7 +172,7 @@ export function answer(key: Intent, ask: Ask): ReactNode[] {
         <Suggest ask={ask} list={["Contact", "Download your résumé"]} />,
       ];
     case "resume":
-      return [<B><p>Here’s my résumé: <a href={RESUME_URL} {...ext}>Anurag_Sharma_Resume.pdf ↗</a></p></B>];
+      return [<B><p>I keep two versions with the same facts, ordered for the role:</p><p className="resume-pick">{RESUMES.map((r) => <a key={r.href} href={r.href} download {...ext}>{r.label} résumé ↓</a>)}</p></B>];
     case "all":
       return [<B><p>Taking you to the full project list below.</p></B>];
     case "fallback":
