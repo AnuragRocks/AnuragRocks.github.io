@@ -10,11 +10,14 @@ import Lab from "@/components/lab/Lab";
 import Journey from "@/components/Journey";
 import Contact from "@/components/Contact";
 import { BigMarquee, ParticleName } from "@/components/MotionBands";
+import { Cursor, ShipPipeline, useTimelineDraw, usePhotoParallax } from "@/components/MotionExtras";
 
 export default function App() {
   // Bumped when the ~/anurag logo is clicked: the hero closes the chat and replays its intro.
   const [replay, setReplay] = useState(0);
   useSiteMotion();
+  useTimelineDraw();
+  usePhotoParallax();
 
   return (
     <>
@@ -29,11 +32,13 @@ export default function App() {
         <BigMarquee />
         <Work />
         <Skills />
+        <ShipPipeline />
         <Lab />
         <Journey />
         <Contact />
       </main>
       <ParticleName />
+      <Cursor />
       <footer>
         <div className="wrap">
           <span>© 2026 Anurag Sharma</span>

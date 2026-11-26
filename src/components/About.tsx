@@ -1,3 +1,4 @@
+import { SplitHeading } from "@/components/MotionExtras";
 import aboutPhoto from "@/assets/about-fusion.jpg";
 
 export default function About() {
@@ -11,7 +12,7 @@ export default function About() {
             <figcaption>FUSION Innovation &amp; Entrepreneurship Network, UWindsor</figcaption>
           </figure>
           <div>
-            <h2>I build the app, then the pipeline and infrastructure it runs on.</h2>
+            <SplitHeading text="I build the app, then the pipeline and infrastructure it runs on." />
             <p>I started as a full-stack developer, shipping six MERN projects for clients in Delhi. Then I moved into cloud operations at Real Time Data Services, where I ran production AWS and Linux environments. I automated provisioning with Terraform and Ansible, moved workloads onto Docker and Kubernetes and kept GitLab pipelines green. Proactive monitoring and root-cause work raised uptime by 15% and cut incident response time by 30%.</p>
             <p>Now I'm finishing a Master of Applied Computing at the University of Windsor. In my co-op with the Office of Research and Innovation I own an animal care digitisation platform end to end, from requirements meetings with the Vice-President's office to Docker images and GitHub Actions. I also lead the university's first Digital Research Infrastructure website with the Digital Research Alliance of Canada.</p>
             <dl className="facts">

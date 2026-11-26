@@ -1,3 +1,4 @@
+import { SplitHeading } from "@/components/MotionExtras";
 const GROUPS: Array<[string, Array<[string, string?]>]> = [
   ["Cloud & DevOps", [["AWS", "CloudFormation"], ["Terraform, Ansible", "IaC"], ["Docker, Kubernetes"], ["GitHub Actions, GitLab CI", "Jenkins"], ["Prometheus, Grafana", "monitoring"], ["Linux / Unix", "hardening"]]],
   ["Backend & data", [["Node.js, Express", "REST"], ["FastAPI", "Python"], ["React, Next.js"], ["PostgreSQL, MongoDB"], ["Kafka, Spark"], ["Capacitor, Drupal"]]],
@@ -9,7 +10,7 @@ export default function Skills() {
     <section className="block" id="skills">
       <div className="wrap">
         <p className="eyebrow">Toolbox</p>
-        <h2>What I work with</h2>
+        <SplitHeading text="What I work with" />
         <div className="skill-tree" aria-hidden="true"><span className="root">skills.root</span></div>
         <div className="skills">
           {GROUPS.map(([title, items]) => (

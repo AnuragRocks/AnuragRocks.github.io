@@ -1,3 +1,4 @@
+import { SplitHeading } from "@/components/MotionExtras";
 const STOPS = [
   { when: "Sep 2026 – Dec 2026 · Windsor, ON", title: "Digital Projects and Communications Assistant (Co-op)", org: "Office of Research and Innovation, University of Windsor",
     text: "Own the animal care digitisation platform end to end, shipped with Docker and GitHub Actions. Lead weekly requirements meetings with directors, the Vice-President and the Chair. Lead the university's first DRI website, and run usability and WCAG reviews on the OVPRI Drupal site." },
@@ -15,7 +16,7 @@ export default function Journey() {
     <section className="block" id="journey">
       <div className="wrap">
         <p className="eyebrow">Experience &amp; education</p>
-        <h2>Where I've been</h2>
+        <SplitHeading text="Where I've been" />
         <ol className="tl">
           {STOPS.map((s) => (
             <li key={s.title}>

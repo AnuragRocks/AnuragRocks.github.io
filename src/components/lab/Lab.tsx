@@ -1,3 +1,4 @@
+import { SplitHeading } from "@/components/MotionExtras";
 import { useCallback, useState } from "react";
 import SortPane, { type SortStats } from "./SortPane";
 import BstPane from "./BstPane";
@@ -11,7 +12,7 @@ export default function Lab() {
     <section className="block" id="lab">
       <div className="wrap">
         <p className="eyebrow">Playground</p>
-        <h2>Algorithms, running live</h2>
+        <SplitHeading text="Algorithms, running live" />
         <p className="lab-intro">Pick an algorithm and watch it sort, or build a binary search tree and walk it in order. It's all running live in React on this page.</p>
         <div className="lab rv">
           <div className="lab-bar">

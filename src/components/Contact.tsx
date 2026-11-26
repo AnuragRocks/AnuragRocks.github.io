@@ -1,3 +1,4 @@
+import { SplitHeading } from "@/components/MotionExtras";
 import type { CSSProperties } from "react";
 import CopyButton from "@/components/CopyButton";
 import { EMAIL, RESUME_URL } from "@/lib/motion";
@@ -14,7 +15,7 @@ export default function Contact() {
           </div>
           <div>
             <p className="eyebrow" style={{ color: "var(--signal)" }}>Contact</p>
-            <h2>Let's build something.</h2>
+            <SplitHeading text="Let's build something." />
             <p>I'm looking for full-stack, DevOps and cloud engineering roles from early 2027. Email is the fastest way to reach me.</p>
           </div>
           <div className="links">

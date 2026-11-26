@@ -1,3 +1,4 @@
+import { SplitHeading } from "@/components/MotionExtras";
 import { useState } from "react";
 
 const FILTERS: Array<[string, string]> = [
@@ -63,7 +64,7 @@ export default function Work() {
     <section className="block" id="work">
       <div className="wrap">
         <p className="eyebrow">Selected work</p>
-        <h2>Things I've built and shipped</h2>
+        <SplitHeading text="Things I've built and shipped" />
         <div className="filters" role="group" aria-label="Filter projects">
           {FILTERS.map(([f, label]) => (
             <button key={f} type="button" aria-pressed={filter === f} onClick={() => setFilter(f)}>{label}</button>
