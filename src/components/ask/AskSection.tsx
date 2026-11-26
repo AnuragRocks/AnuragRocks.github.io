@@ -166,6 +166,7 @@ export default function AskSection({ replay }: { replay: number }) {
   const [burst, setBurst] = useState(false);
   const section = useRef<HTMLElement>(null);
   const spot = useRef<HTMLDivElement>(null);
+  const watermark = useRef<HTMLDivElement>(null);
   const log = useRef<HTMLDivElement>(null);
   const nextId = useRef(0);
 
@@ -209,12 +210,22 @@ export default function AskSection({ replay }: { replay: number }) {
     const r = section.current.getBoundingClientRect();
     spot.current.style.setProperty("--sx", e.clientX - r.left + "px");
     spot.current.style.setProperty("--sy", e.clientY - r.top + "px");
+    // ink reveal: colour floods into the SHARMA watermark under the cursor
+    const wm = watermark.current;
+    if (wm) {
+      const w = wm.getBoundingClientRect();
+      wm.style.setProperty("--wx", e.clientX - w.left + "px");
+      wm.style.setProperty("--wy", e.clientY - w.top + "px");
+    }
   };
+  const onPointerLeave = () => watermark.current?.style.setProperty("--wx", "-999px");
 
   return (
-    <section className={"ask" + (burst ? " flash" : "")} aria-label="Ask Anurag" ref={section} onPointerMove={onPointerMove}>
+    <section className={"ask" + (burst ? " flash" : "")} aria-label="Ask Anurag" ref={section} onPointerMove={onPointerMove} onPointerLeave={onPointerLeave}>
+      <div className="grid-floor" aria-hidden="true" />
+      <div className="beams" aria-hidden="true"><i /><i /><i /></div>
       <div className="spot" aria-hidden="true" ref={spot} />
-      <div className="watermark" aria-hidden="true">SHARMA</div>
+      <div className="watermark" aria-hidden="true" ref={watermark}>SHARMA</div>
       <BfsTree />
       <RouteGraph />
       <div className="wrap">

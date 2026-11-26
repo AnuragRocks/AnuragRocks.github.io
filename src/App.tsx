@@ -9,6 +9,7 @@ import Skills from "@/components/Skills";
 import Lab from "@/components/lab/Lab";
 import Journey from "@/components/Journey";
 import Contact from "@/components/Contact";
+import { BigMarquee, ParticleName } from "@/components/MotionBands";
 
 export default function App() {
   // Bumped when the ~/anurag logo is clicked: the hero closes the chat and replays its intro.
@@ -25,12 +26,14 @@ export default function App() {
         <Stats />
         <SectionNav />
         <About />
+        <BigMarquee />
         <Work />
         <Skills />
         <Lab />
         <Journey />
         <Contact />
       </main>
+      <ParticleName />
       <footer>
         <div className="wrap">
           <span>© 2026 Anurag Sharma</span>
