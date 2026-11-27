@@ -481,7 +481,7 @@ section.block h2.in::after{transform:scaleX(.35)}
 .beams i:nth-child(3){left:46%;transform:rotate(16deg);animation-delay:4.8s}
 @keyframes beam{0%{opacity:0;translate:0 -30%}15%{opacity:1}55%{opacity:.9}75%,100%{opacity:0;translate:0 60%}}
 /* ink-reveal watermark: colour floods in under the cursor */
-.watermark{background:radial-gradient(240px circle at var(--wx,-999px) var(--wy,-999px),var(--accent),#a855f7 40%,var(--signal) 60%,transparent 72%),linear-gradient(var(--wm),var(--wm));-webkit-background-clip:text;background-clip:text;color:transparent}
+.watermark{background:radial-gradient(320px circle at var(--wx,-999px) var(--wy,-999px),var(--accent),#a855f7 40%,var(--signal) 60%,transparent 72%),linear-gradient(var(--wm),var(--wm));-webkit-background-clip:text;background-clip:text;color:transparent}
 /* outlined marquee driven by scroll velocity */
 .big-marquee{overflow:hidden;border-block:1px solid var(--line);padding-block:var(--s5);user-select:none}
 .big-marquee .row{display:flex;gap:2.5rem;width:max-content;will-change:transform;font-family:var(--f-display);font-weight:800;font-size:clamp(3rem,9vw,7.5rem);line-height:1;letter-spacing:-.03em;white-space:nowrap}
@@ -512,6 +512,7 @@ body.has-cursor .cur-dot.off{opacity:0}
 .cur-ring::before{content:"";position:absolute;width:34px;height:34px;left:-17px;top:-17px;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--accent) 70%,transparent);transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s ease,border-color .3s ease}
 .cur-ring.c-hot::before{transform:scale(1.6);background:color-mix(in srgb,var(--accent) 12%,transparent);border-color:transparent}
 .cur-ring.c-down::before{transform:scale(.75)}
+.cur-ring.c-ghost::before{transform:scale(.5);opacity:.5}
 .cur-ring.c-card::before{transform:scale(2.3);background:color-mix(in srgb,var(--accent) 88%,transparent);border-color:transparent}
 .cur-ring span{position:absolute;left:0;top:0;transform:translate(-50%,-50%) scale(.6);font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;color:var(--on-accent);opacity:0;transition:opacity .25s ease,transform .35s ease;white-space:nowrap}
 .cur-ring.c-card span{opacity:1;transform:translate(-50%,-50%) scale(1)}

@@ -62,10 +62,11 @@ export function Cursor() {
     };
     const classify = (t: Element | null) => {
       const card = t?.closest("#projects .card");
-      const hot = t?.closest("a,button,[role=switch],.tile,.chip,canvas,input,textarea");
+      const hot = t?.closest("a,button,[role=switch],.tile,.chip,input,textarea");
       r.classList.toggle("c-card", !!card && !hot);
       d.classList.toggle("off", !!card && !hot);
       r.classList.toggle("c-hot", !!hot);
+      r.classList.toggle("c-ghost", !!t?.closest(".particles canvas"));
     };
     // scrolling moves the page under a still cursor, so re-check what it is over
     const onScroll = () => classify(document.elementFromPoint(target.x, target.y));

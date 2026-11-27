@@ -206,17 +206,18 @@ export default function AskSection({ replay }: { replay: number }) {
   }, [replay]);
 
   const onPointerMove = (e: React.PointerEvent) => {
-    if (!hasFinePointer() || prefersReducedMotion() || !section.current || !spot.current) return;
-    const r = section.current.getBoundingClientRect();
-    spot.current.style.setProperty("--sx", e.clientX - r.left + "px");
-    spot.current.style.setProperty("--sy", e.clientY - r.top + "px");
-    // ink reveal: colour floods into the SHARMA watermark under the cursor
+    // ink reveal: colour floods into the SHARMA watermark under the cursor (or finger).
+    // It only follows the pointer, so it stays on for every device and motion setting.
     const wm = watermark.current;
     if (wm) {
       const w = wm.getBoundingClientRect();
       wm.style.setProperty("--wx", e.clientX - w.left + "px");
       wm.style.setProperty("--wy", e.clientY - w.top + "px");
     }
+    if (!hasFinePointer() || prefersReducedMotion() || !section.current || !spot.current) return;
+    const r = section.current.getBoundingClientRect();
+    spot.current.style.setProperty("--sx", e.clientX - r.left + "px");
+    spot.current.style.setProperty("--sy", e.clientY - r.top + "px");
   };
   const onPointerLeave = () => watermark.current?.style.setProperty("--wx", "-999px");
 
